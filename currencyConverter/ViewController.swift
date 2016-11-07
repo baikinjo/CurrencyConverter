@@ -40,14 +40,48 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: code)
     }
     
+    
+    func addDoneButtonOnKeyboard() {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle       = UIBarStyle.default
+        let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(ViewController.doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        self.input.inputAccessoryView = doneToolbar
+    }
+    
+    func doneButtonAction() {
+        self.input.resignFirstResponder()
+    }
+    
+    
+    
     @IBAction func convert(_ sender: AnyObject) {
         if(input.text != ""){
-            output.text = "CAD $\(input.text!) to \(selectedCode) is " + getSymbolForCurrencyCode(code: selectedCode)! + String(format: "%.2f", Double(input.text!)! * selectedVal)
+            var initial: Double = Double(input.text!)!
+            var result: Double = initial * selectedVal
+            initial = initial.roundTo(places: 2)
+            result = result.roundTo(places: 2)
+            let numFormat = NumberFormatter()
+            numFormat.numberStyle = NumberFormatter.Style.decimal
+            
+            output.text = "CAD $" + numFormat.string(from: NSNumber(value: initial))! + " to \(selectedCode) is " + getSymbolForCurrencyCode(code: selectedCode)! + numFormat.string(from: NSNumber(value: result))!
+            
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        input.keyboardType = UIKeyboardType.decimalPad
+        self.hideKeyboardWhenTappedAround()
+        self.addDoneButtonOnKeyboard()
         let url = URL(string: "http://api.fixer.io/latest?base=CAD")
         let task = URLSession.shared.dataTask(with: url!){
             (data, response, error) in
@@ -72,12 +106,32 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         task.resume()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
+
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+extension Double {
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
 
