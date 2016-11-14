@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import SystemConfiguration
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
+    
+    
     @IBOutlet weak var input: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var output: UILabel!
@@ -79,7 +82,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        input.keyboardType = UIKeyboardType.decimalPad
+        input.delegate = self
         self.hideKeyboardWhenTappedAround()
         self.addDoneButtonOnKeyboard()
         let url = URL(string: "http://api.fixer.io/latest?base=CAD")
@@ -106,13 +109,43 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         task.resume()
     }
+  
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let tempRange = textField.text?.range(of: ".", options: NSString.CompareOptions.literal, range: nil, locale: nil)
+        if tempRange?.isEmpty == false && string == "." {
+            return false
+        }
+        
+        return true
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+       
+        if Reachability.isConnectedToNetwork() == true
+        {
+            print("Connected")
+        }
+        else
+        {
+            let controller = UIAlertController(title: "No Internet Detected", message: "This app requires an Internet connection", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            controller.addAction(ok)
+            
+            present(controller, animated: true, completion: nil)
+        }
+        
+    }
 }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD1BB1641DD990B9007952B7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1BB1631DD990B9007952B7 /* Reachability.swift */; };
 		AD54243B1DD0176F0030BEF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD54243A1DD0176F0030BEF4 /* AppDelegate.swift */; };
 		AD54243D1DD0176F0030BEF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD54243C1DD0176F0030BEF4 /* ViewController.swift */; };
 		AD5424401DD0176F0030BEF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD54243E1DD0176F0030BEF4 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD1BB1631DD990B9007952B7 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		AD5424371DD0176F0030BEF4 /* currencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = currencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD54243A1DD0176F0030BEF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD54243C1DD0176F0030BEF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				AD5424411DD0176F0030BEF4 /* Assets.xcassets */,
 				AD5424431DD0176F0030BEF4 /* LaunchScreen.storyboard */,
 				AD5424461DD0176F0030BEF4 /* Info.plist */,
+				AD1BB1631DD990B9007952B7 /* Reachability.swift */,
 			);
 			path = currencyConverter;
 			sourceTree = "<group>";
@@ -96,6 +99,7 @@
 				TargetAttributes = {
 					AD5424361DD0176F0030BEF4 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = G25BG2CFLN;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -137,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD54243D1DD0176F0030BEF4 /* ViewController.swift in Sources */,
+				AD1BB1641DD990B9007952B7 /* Reachability.swift in Sources */,
 				AD54243B1DD0176F0030BEF4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,7 +265,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G25BG2CFLN;
 				INFOPLIST_FILE = currencyConverter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.currencyConverter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -272,7 +279,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G25BG2CFLN;
 				INFOPLIST_FILE = currencyConverter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.currencyConverter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -299,6 +308,7 @@
 				AD54244B1DD0176F0030BEF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
